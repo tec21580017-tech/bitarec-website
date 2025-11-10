@@ -1,0 +1,148 @@
+<div class="contenido-pagina">
+    <!-- Hero Section -->
+    <section class="dashboard-hero">
+        <div class="welcome-section">
+            <h1 id="welcome-title">¡Bienvenido!</h1>
+            <div class="welcome-text">
+                <p>Tu espacio personal para registrar, organizar y recordar cada paso de tu trabajo. Porque cada detalle merece quedar grabado.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>📚 Bitácoras</h3>
+                    <p class="stat-number" id="total-bitacoras">0</p>
+                    <p class="stat-label">Total activas</p>
+                </div>
+                <div class="stat-card">
+                    <h3>📝 Entradas</h3>
+                    <p class="stat-number" id="total-entradas">0</p>
+                    <p class="stat-label">Total registradas</p>
+                </div>
+                <div class="stat-card">
+                    <h3>🕒 Hoy</h3>
+                    <p class="stat-number" id="entradas-hoy">0</p>
+                    <p class="stat-label">Entradas de hoy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Actions Section -->
+    <section class="actions-section">
+        <h2>¿Qué deseas hacer hoy?</h2>
+        <div class="action-grid">
+            <div class="action-card" onclick="cargarPagina('nueva-bitacora')">
+                <h3>📝 Nueva Bitácora</h3>
+                <p>Crear una nueva bitácora para registrar tus actividades</p>
+            </div>
+            <div class="action-card" onclick="cargarPagina('mis-bitacoras')">
+                <h3>📚 Mis Bitácoras</h3>
+                <p>Ver y gestionar todas tus bitácoras existentes</p>
+            </div>
+            <div class="action-card" onclick="cargarPagina('entradas-recientes')">
+                <h3>🕒 Recientes</h3>
+                <p>Revisar las entradas más recientes</p>
+            </div>
+            <div class="action-card" onclick="cargarPagina('buscar')">
+                <h3>🔍 Buscar</h3>
+                <p>Buscar en todos tus registros y bitácoras</p>
+            </div>
+            <div class="action-card" onclick="cargarPagina('exportar')">
+                <h3>📤 Exportar</h3>
+                <p>Exportar tus datos y bitácoras</p>
+            </div>
+            <div class="action-card" onclick="cargarPagina('configuracion')">
+                <h3>⚙️ Configuración</h3>
+                <p>Gestionar tu cuenta y preferencias</p>
+            </div>
+            <div class="action-card" onclick="cargarPagina('papelera')">
+                <h3>🗑️ Papelera</h3>
+                <p>Elementos eliminados recientemente</p>
+            </div>
+            <div class="action-card" onclick="cargarPagina('ayuda')">
+                <h3>❓ Ayuda</h3>
+                <p>Centro de ayuda y soporte</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Sections -->
+    <div class="info-sections">
+        <div class="info-column">
+            <h3>📋 MANUAL RÁPIDO</h3>
+            <ul>
+                <li onclick="mostrarNotificacion('Guía: Crear bitácora', 'info')">Crear tu primera bitácora</li>
+                <li onclick="mostrarNotificacion('Guía: Agregar entradas', 'info')">Agregar entradas diarias</li>
+                <li onclick="mostrarNotificacion('Guía: Organizar', 'info')">Organizar con etiquetas</li>
+                <li onclick="mostrarNotificacion('Guía: Exportar', 'info')">Exportar tus registros</li>
+                <li onclick="mostrarNotificacion('Guía: Privacidad', 'info')">Configurar privacidad</li>
+            </ul>
+        </div>
+
+        <div class="info-column">
+            <h3>❓ PREGUNTAS FRECUENTES</h3>
+            <ul>
+                <li onclick="mostrarNotificacion('Ve a Mis Bitácoras → Nueva Bitácora', 'info')">¿Cómo crear una bitácora?</li>
+                <li onclick="mostrarNotificacion('Funcionalidad en desarrollo', 'info')">¿Cómo compartir bitácoras?</li>
+                <li onclick="mostrarNotificacion('Ve a Exportar y elige formato', 'info')">¿Cómo exportar mis registros?</li>
+                <li onclick="mostrarNotificacion('Ve a la Papelera para recuperar', 'info')">¿Cómo recuperar bitácoras eliminadas?</li>
+                <li onclick="mostrarNotificacion('Ve a Configuración → Seguridad', 'info')">¿Cómo cambiar mi contraseña?</li>
+            </ul>
+        </div>
+
+        <div class="info-column">
+            <h3>ℹ️ ACERCA DE</h3>
+            <ul>
+                <li onclick="mostrarNotificacion('Misión: Facilitar la organización de registros...', 'info')">Misión y Visión</li>
+                <li onclick="mostrarNotificacion('Desarrollado con ❤️ para BITAREC', 'info')">Equipo de desarrollo</li>
+                <li onclick="mostrarNotificacion('Contacto: soporte@bitarec.com', 'info')">Contacto y soporte</li>
+                <li onclick="mostrarNotificacion('Términos de servicio en desarrollo', 'info')">Términos de servicio</li>
+                <li onclick="mostrarNotificacion('Política de privacidad en desarrollo', 'info')">Política de privacidad</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+// Cargar estadísticas al mostrar la página
+document.addEventListener('DOMContentLoaded', function() {
+    cargarEstadisticas();
+});
+
+async function cargarEstadisticas() {
+    try {
+        const { BitacoraManager } = await import('../assets/js/bitacoras.js');
+        const { EntradaManager } = await import('../assets/js/entradas.js');
+        const { AuthManager } = await import('../assets/js/auth.js');
+
+        const usuario = await AuthManager.getUsuarioActual();
+        if (usuario) {
+            document.getElementById('welcome-title').textContent = `¡Bienvenido ${usuario.usu_nombre}!`;
+        }
+
+        // Obtener bitácoras
+        const bitacorasResult = await BitacoraManager.obtenerBitacorasUsuario();
+        if (bitacorasResult.success) {
+            document.getElementById('total-bitacoras').textContent = bitacorasResult.bitacoras.length;
+        }
+
+        // Obtener entradas recientes
+        const entradasResult = await EntradaManager.obtenerEntradasRecientes(100);
+        if (entradasResult.success) {
+            const totalEntradas = entradasResult.entradas.length;
+            document.getElementById('total-entradas').textContent = totalEntradas;
+
+            // Contar entradas de hoy
+            const hoy = new Date().toDateString();
+            const entradasHoy = entradasResult.entradas.filter(entrada => {
+                const fechaEntrada = new Date(entrada.ent_fecha_creacion).toDateString();
+                return fechaEntrada === hoy;
+            }).length;
+            
+            document.getElementById('entradas-hoy').textContent = entradasHoy;
+        }
+    } catch (error) {
+        console.error('Error cargando estadísticas:', error);
+    }
+}
+</script>

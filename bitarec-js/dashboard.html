@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITAREC - Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- La navegación y contenido se cargarán dinámicamente -->
+        <div id="loading">Cargando BITAREC...</div>
+    </div>
+
+    <script type="module">
+        import { AuthManager } from './assets/js/auth.js';
+        import { DashboardManager } from './assets/js/dashboard.js';
+
+        // Verificar autenticación
+        document.addEventListener('DOMContentLoaded', async function() {
+            if (!await AuthManager.estaLogueado()) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Cargar dashboard
+            await DashboardManager.cargarDashboard();
+        });
+    </script>
+</body>
+</html>

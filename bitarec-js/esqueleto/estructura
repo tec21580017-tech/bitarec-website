@@ -1,0 +1,31 @@
+bitarec-js/
+├── index.html
+├── dashboard.html
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── img/
+│   │   └── 1.jpg
+│   │   └── 2.jpg
+│   │   └── 3.jpg
+│   │   └── img0.jpg
+│   │   └── img4.jpg
+│   │   └── logo-bitarec-v1.png
+│   │   └── logo1.png
+│   │   └── logo2.png
+│   └── js/
+│       ├── supabase-client.js
+│       ├── auth.js
+│       ├── bitacoras.js
+│       ├── entradas.js
+│       └── main.js
+└── pages/
+    ├── inicio.html
+    ├── nueva-bitacora.html
+    ├── mis-bitacoras.html
+    ├── entradas-recientes.html
+    ├── buscar.html
+    ├── exportar.html
+    ├── configuracion.html
+    ├── papelera.html
+    └── ayuda.html

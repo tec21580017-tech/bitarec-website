@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITAREC - Organiza, Registra, Mejora</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Mantén todos tus estilos CSS actuales */
+    </style>
+</head>
+<body>
+    <!-- Header (igual que tu código actual) -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-image">
+                    <img src="assets/img/logo-bitarec-v1.png" alt="BITAREC Logo">
+                </div>
+                <div class="logo-text">
+                    <h1>BITAREC</h1>
+                    <p>Organiza. Registra. Mejora.</p>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="#" class="btn btn-outline" onclick="openModal('login')">Iniciar sesión</a>
+                <a href="#" class="btn btn-primary" onclick="openModal('register')">Registrarse</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section (igual que tu código actual) -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>¡Bienvenido a Bitarec!</h2>
+                <p>Tu espacio personal para registrar, organizar y recordar cada paso de tu trabajo.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary" onclick="openModal('login')">Iniciar sesión</a>
+                    <a href="#" class="btn btn-outline" onclick="openModal('register')">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section (igual que tu código actual) -->
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Organiza</h3>
+                <p>Mantén tus actividades laborales y proyectos perfectamente estructurados.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📝</div>
+                <h3>Registra</h3>
+                <p>Guarda cada detalle de tu jornada, tareas realizadas, avances, incidencias.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <h3>Mejora</h3>
+                <p>Analiza tus registros y observa patrones de desempeño claros y útiles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (igual que tu código actual) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="nosotros.html">Acerca de nosotros</a>
+                <a href="preguntas.html">FAQ</a>
+                <a href="politicas.html">Políticas de privacidad</a>
+            </div>
+            <div class="footer-copy">
+                © 2025 Bitarec. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Login (modificado para JS) -->
+    <div id="loginModal" class="auth-modal">
+        <div class="auth-content">
+            <span class="close-modal" onclick="closeModal('login')">&times;</span>
+            <h2 class="form-title">Iniciar sesión</h2>
+            
+            <div id="loginError" class="error-message" style="display: none;"></div>
+            <div id="loginSuccess" class="success-message" style="display: none;"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" onclick="togglePasswordVisibility('password')">
+                        <span>Mostrar contraseña</span>
+                    </label>
+                    <a href="#" class="forgot-password">¿Olvidaste la contraseña?</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Acceder</button>
+            </form>
+
+            <div class="auth-switch">
+                <p>¿Aún no tienes cuenta? <a href="#" onclick="switchToRegister()">Regístrate</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Registro (modificado para JS) -->
+    <div id="registerModal" class="auth-modal">
+        <div class="auth-content">
+            <span class="close-modal" onclick="closeModal('register')">&times;</span>
+            <h2 class="form-title">Registrarse</h2>
+            
+            <div id="registerError" class="error-message" style="display: none;"></div>
+            <div id="registerSuccess" class="success-message" style="display: none;"></div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email_registro">Correo electrónico</label>
+                    <input type="email" id="email_registro" name="email_registro" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password_registro">Contraseña</label>
+                    <input type="password" id="password_registro" name="password_registro" class="form-control" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+            </form>
+
+            <div class="auth-switch">
+                <p>¿Ya tienes cuenta? <a href="#" onclick="switchToLogin()">Inicia sesión</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { AuthManager } from './assets/js/auth.js';
+
+        // Verificar si ya está logueado
+        document.addEventListener('DOMContentLoaded', async function() {
+            if (await AuthManager.estaLogueado()) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+
+        // Manejar login
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+            const successDiv = document.getElementById('loginSuccess');
+
+            if (!email || !password) {
+                showMessage(errorDiv, 'Todos los campos son obligatorios');
+                return;
+            }
+
+            const result = await AuthManager.loginUsuario(email, password);
+            
+            if (result.success) {
+                showMessage(successDiv, 'Inicio de sesión exitoso');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
+            } else {
+                showMessage(errorDiv, result.error || 'Credenciales incorrectas');
+            }
+        });
+
+        // Manejar registro
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email_registro').value;
+            const password = document.getElementById('password_registro').value;
+            const errorDiv = document.getElementById('registerError');
+            const successDiv = document.getElementById('registerSuccess');
+
+            if (!nombre || !email || !password) {
+                showMessage(errorDiv, 'Todos los campos son obligatorios');
+                return;
+            }
+
+            if (password.length < 6) {
+                showMessage(errorDiv, 'La contraseña debe tener al menos 6 caracteres');
+                return;
+            }
+
+            const result = await AuthManager.registrarUsuario(nombre, email, password);
+            
+            if (result.success) {
+                showMessage(successDiv, 'Registro exitoso. Ahora puedes iniciar sesión.');
+                setTimeout(() => {
+                    closeModal('register');
+                    openModal('login');
+                }, 2000);
+            } else {
+                showMessage(errorDiv, result.error || 'Error en el registro');
+            }
+        });
+
+        function showMessage(element, message) {
+            element.textContent = message;
+            element.style.display = 'block';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        // Mantén todas tus funciones de modal existentes
+        function openModal(type) {
+            if (type === 'login') {
+                document.getElementById('loginModal').style.display = 'block';
+                clearForms();
+            } else {
+                document.getElementById('registerModal').style.display = 'block';
+                clearForms();
+            }
+        }
+
+        function closeModal(type) {
+            if (type === 'login') {
+                document.getElementById('loginModal').style.display = 'none';
+            } else {
+                document.getElementById('registerModal').style.display = 'none';
+            }
+            clearForms();
+        }
+
+        function switchToRegister() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('registerModal').style.display = 'block';
+            clearForms();
+        }
+
+        function switchToLogin() {
+            document.getElementById('registerModal').style.display = 'none';
+            document.getElementById('loginModal').style.display = 'block';
+            clearForms();
+        }
+
+        function clearForms() {
+            document.getElementById('loginError').style.display = 'none';
+            document.getElementById('registerError').style.display = 'none';
+            document.getElementById('loginSuccess').style.display = 'none';
+            document.getElementById('registerSuccess').style.display = 'none';
+            document.getElementById('loginForm').reset();
+            document.getElementById('registerForm').reset();
+        }
+
+        function togglePasswordVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('auth-modal')) {
+                event.target.style.display = 'none';
+                clearForms();
+            }
+        }
+    </script>
+</body>
+</html>

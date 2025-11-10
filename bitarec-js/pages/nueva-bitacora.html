@@ -1,0 +1,245 @@
+<div class="contenido-pagina">
+    <h1>📝 Nueva Bitácora</h1>
+
+    <div id="mensajes"></div>
+
+    <div class="form-container">
+        <form id="formBitacora">
+            <!-- Sección: Información Básica -->
+            <div class="form-section">
+                <h3>📋 Información Básica</h3>
+                <div class="form-group">
+                    <label for="titulo">Título de la bitácora:</label>
+                    <input type="text" id="titulo" name="titulo" required placeholder="Ej: Mantenimiento de Servidores - Cliente XYZ">
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" placeholder="Describe el propósito y objetivo de esta bitácora..."></textarea>
+                </div>
+            </div>
+
+            <!-- Sección: Datos del Personal Encargado -->
+            <div class="form-section">
+                <h3>👤 Datos del Personal Encargado</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="personal_nombre">Nombre completo:</label>
+                        <input type="text" id="personal_nombre" name="personal_nombre" placeholder="Nombre Apellido Apellido">
+                    </div>
+                    <div class="form-group">
+                        <label for="personal_telefono">Teléfono:</label>
+                        <input type="tel" id="personal_telefono" name="personal_telefono" placeholder="00.0000-0000">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="personal_lugar">Lugar/Departamento:</label>
+                        <input type="text" id="personal_lugar" name="personal_lugar" placeholder="Lugar o departamento asignado">
+                    </div>
+                    <div class="form-group">
+                        <label for="personal_email">Correo electrónico:</label>
+                        <input type="email" id="personal_email" name="personal_email" placeholder="correo@empresa.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="motivo_visita">Motivo de visita/actividad:</label>
+                    <input type="text" id="motivo_visita" name="motivo_visita" placeholder="Motivo específico de la actividad">
+                </div>
+            </div>
+
+            <!-- Sección: Datos del Cliente -->
+            <div class="form-section">
+                <h3>🏢 Datos del Cliente</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cliente_nombre">Nombre del cliente:</label>
+                        <input type="text" id="cliente_nombre" name="cliente_nombre" placeholder="Nombre del cliente o empresa">
+                    </div>
+                    <div class="form-group">
+                        <label for="cliente_telefono">Teléfono:</label>
+                        <input type="tel" id="cliente_telefono" name="cliente_telefono" placeholder="00.0000-0000">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cliente_direccion">Dirección:</label>
+                        <input type="text" id="cliente_direccion" name="cliente_direccion" placeholder="Calle, Colonia, Ciudad, Estado, CP">
+                    </div>
+                    <div class="form-group">
+                        <label for="cliente_email">Correo electrónico:</label>
+                        <input type="email" id="cliente_email" name="cliente_email" placeholder="cliente@empresa.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="problema_tipo">Tipo de problema/necesidad:</label>
+                    <select id="problema_tipo" name="problema_tipo">
+                        <option value="">Seleccionar tipo...</option>
+                        <option value="mobiliario">Mobiliario</option>
+                        <option value="electronico">Electrónico</option>
+                        <option value="software">Software</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="redes">Redes</option>
+                        <option value="electrico">Eléctrico</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Sección: Descripción del Objeto a Revisar -->
+            <div class="form-section">
+                <h3>🔧 Descripción del Objeto a Revisar</h3>
+                <div class="form-group">
+                    <label for="objeto_descripcion">Descripción detallada:</label>
+                    <textarea id="objeto_descripcion" name="objeto_descripcion" placeholder="Describe el equipo, sistema o elemento a revisar..."></textarea>
+                </div>
+            </div>
+
+            <!-- Sección: Diagnóstico y Problemática -->
+            <div class="form-section">
+                <h3>🔍 Diagnóstico y Problemática</h3>
+                <div class="form-group">
+                    <label for="diagnostico">Diagnóstico inicial:</label>
+                    <textarea id="diagnostico" name="diagnostico" placeholder="Describe el diagnóstico, síntomas y problemática identificada..."></textarea>
+                </div>
+            </div>
+
+            <!-- Sección: Observaciones -->
+            <div class="form-section">
+                <h3>📝 Observaciones</h3>
+                <div class="form-group">
+                    <label for="observaciones">Observaciones y notas adicionales:</label>
+                    <textarea id="observaciones" name="observaciones" placeholder="Agrega observaciones, recomendaciones o notas importantes..."></textarea>
+                </div>
+            </div>
+
+            <!-- Sección: Configuración -->
+            <div class="form-section">
+                <h3>⚙️ Configuración</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="categoria">Categoría:</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">Seleccionar categoría</option>
+                            <option value="mantenimiento">Mantenimiento</option>
+                            <option value="reparacion">Reparación</option>
+                            <option value="instalacion">Instalación</option>
+                            <option value="revision">Revisión</option>
+                            <option value="soporte">Soporte Técnico</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="privacidad">Privacidad:</label>
+                        <select id="privacidad" name="privacidad">
+                            <option value="privada">Privada</option>
+                            <option value="publica">Pública</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="prioridad">Prioridad:</label>
+                    <select id="prioridad" name="prioridad">
+                        <option value="baja">Baja</option>
+                        <option value="media" selected>Media</option>
+                        <option value="alta">Alta</option>
+                        <option value="urgente">Urgente</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <span>📋</span> Crear Bitácora
+                </button>
+                <button type="button" class="btn btn-outline" onclick="cargarPagina('inicio')">Cancelar</button>
+                <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">
+                    <span>🗑️</span> Limpiar Formulario
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('formBitacora').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const datos = Object.fromEntries(formData.entries());
+    
+    // Validaciones
+    if (!datos.titulo.trim()) {
+        mostrarMensaje('El título de la bitácora es obligatorio', 'error');
+        return;
+    }
+
+    if (!datos.categoria) {
+        mostrarMensaje('Debes seleccionar una categoría', 'error');
+        return;
+    }
+
+    try {
+        const { BitacoraManager } = await import('../assets/js/bitacoras.js');
+        
+        // Preparar configuración adicional
+        const configuracion = {
+            personal_nombre: datos.personal_nombre,
+            personal_telefono: datos.personal_telefono,
+            personal_lugar: datos.personal_lugar,
+            personal_email: datos.personal_email,
+            motivo_visita: datos.motivo_visita,
+            cliente_nombre: datos.cliente_nombre,
+            cliente_telefono: datos.cliente_telefono,
+            cliente_direccion: datos.cliente_direccion,
+            cliente_email: datos.cliente_email,
+            problema_tipo: datos.problema_tipo,
+            objeto_descripcion: datos.objeto_descripcion,
+            diagnostico: datos.diagnostico,
+            observaciones: datos.observaciones,
+            prioridad: datos.prioridad
+        };
+
+        const datosBitacora = {
+            titulo: datos.titulo,
+            descripcion: datos.descripcion,
+            tipo: 'tecnica', // Por defecto para categorías técnicas
+            configuracion: configuracion,
+            publica: datos.privacidad === 'publica'
+        };
+
+        const resultado = await BitacoraManager.crearBitacora(null, datosBitacora);
+        
+        if (resultado.success) {
+            mostrarMensaje('✅ Bitácora creada exitosamente', 'success');
+            setTimeout(() => {
+                cargarPagina('mis-bitacoras');
+            }, 1500);
+        } else {
+            mostrarMensaje('❌ Error al crear bitácora: ' + resultado.error, 'error');
+        }
+    } catch (error) {
+        mostrarMensaje('❌ Error: ' + error.message, 'error');
+    }
+});
+
+function limpiarFormulario() {
+    if (confirm('¿Estás seguro de que deseas limpiar todo el formulario? Se perderán todos los datos ingresados.')) {
+        document.getElementById('formBitacora').reset();
+        mostrarMensaje('Formulario limpiado correctamente', 'success');
+    }
+}
+
+function mostrarMensaje(mensaje, tipo) {
+    const mensajesDiv = document.getElementById('mensajes');
+    mensajesDiv.innerHTML = `
+        <div class="alert alert-${tipo}">
+            ${mensaje}
+        </div>
+    `;
+    
+    setTimeout(() => {
+        mensajesDiv.innerHTML = '';
+    }, 5000);
+}
+</script>
