@@ -1,148 +1,413 @@
-<div class="contenido-pagina">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BITAREC - Organiza, Registra, Mejora</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Estilos para los modales */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+
+        .close-modal:hover {
+            color: #e74c3c;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+
+        .error-message {
+            background-color: #fde8e8;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eaeaea;
+        }
+
+        .auth-switch a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-image">
+                    <!-- Si tienes el logo, descomenta esta línea -->
+                    <!-- <img src="assets/img/logo-bitarec-v1.png" alt="BITAREC Logo"> -->
+                    <div class="logo-placeholder">BR</div>
+                </div>
+                <div class="logo-text">
+                    <h1>BITAREC</h1>
+                    <p>Organiza. Registra. Mejora.</p>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="#" class="btn btn-outline" onclick="openModal('login')">Iniciar sesión</a>
+                <a href="#" class="btn btn-primary" onclick="openModal('register')">Registrarse</a>
+            </nav>
+        </div>
+    </header>
+
     <!-- Hero Section -->
-    <section class="dashboard-hero">
-        <div class="welcome-section">
-            <h1 id="welcome-title">¡Bienvenido!</h1>
-            <div class="welcome-text">
-                <p>Tu espacio personal para registrar, organizar y recordar cada paso de tu trabajo. Porque cada detalle merece quedar grabado.</p>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>📚 Bitácoras</h3>
-                    <p class="stat-number" id="total-bitacoras">0</p>
-                    <p class="stat-label">Total activas</p>
-                </div>
-                <div class="stat-card">
-                    <h3>📝 Entradas</h3>
-                    <p class="stat-number" id="total-entradas">0</p>
-                    <p class="stat-label">Total registradas</p>
-                </div>
-                <div class="stat-card">
-                    <h3>🕒 Hoy</h3>
-                    <p class="stat-number" id="entradas-hoy">0</p>
-                    <p class="stat-label">Entradas de hoy</p>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>¡Bienvenido a Bitarec!</h2>
+                <p>Tu espacio personal para registrar, organizar y recordar cada paso de tu trabajo.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary" onclick="openModal('login')">Iniciar sesión</a>
+                    <a href="#" class="btn btn-outline" onclick="openModal('register')">Registrarse</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Actions Section -->
-    <section class="actions-section">
-        <h2>¿Qué deseas hacer hoy?</h2>
-        <div class="action-grid">
-            <div class="action-card" onclick="cargarPagina('nueva-bitacora')">
-                <h3>📝 Nueva Bitácora</h3>
-                <p>Crear una nueva bitácora para registrar tus actividades</p>
-            </div>
-            <div class="action-card" onclick="cargarPagina('mis-bitacoras')">
-                <h3>📚 Mis Bitácoras</h3>
-                <p>Ver y gestionar todas tus bitácoras existentes</p>
-            </div>
-            <div class="action-card" onclick="cargarPagina('entradas-recientes')">
-                <h3>🕒 Recientes</h3>
-                <p>Revisar las entradas más recientes</p>
-            </div>
-            <div class="action-card" onclick="cargarPagina('buscar')">
-                <h3>🔍 Buscar</h3>
-                <p>Buscar en todos tus registros y bitácoras</p>
-            </div>
-            <div class="action-card" onclick="cargarPagina('exportar')">
-                <h3>📤 Exportar</h3>
-                <p>Exportar tus datos y bitácoras</p>
-            </div>
-            <div class="action-card" onclick="cargarPagina('configuracion')">
-                <h3>⚙️ Configuración</h3>
-                <p>Gestionar tu cuenta y preferencias</p>
-            </div>
-            <div class="action-card" onclick="cargarPagina('papelera')">
-                <h3>🗑️ Papelera</h3>
-                <p>Elementos eliminados recientemente</p>
-            </div>
-            <div class="action-card" onclick="cargarPagina('ayuda')">
-                <h3>❓ Ayuda</h3>
-                <p>Centro de ayuda y soporte</p>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Organiza</h3>
+                    <p>Mantén tus actividades laborales y proyectos perfectamente estructurados.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📝</div>
+                    <h3>Registra</h3>
+                    <p>Guarda cada detalle de tu jornada, tareas realizadas, avances, incidencias.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Mejora</h3>
+                    <p>Analiza tus registros y observa patrones de desempeño claros y útiles.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Info Sections -->
-    <div class="info-sections">
-        <div class="info-column">
-            <h3>📋 MANUAL RÁPIDO</h3>
-            <ul>
-                <li onclick="mostrarNotificacion('Guía: Crear bitácora', 'info')">Crear tu primera bitácora</li>
-                <li onclick="mostrarNotificacion('Guía: Agregar entradas', 'info')">Agregar entradas diarias</li>
-                <li onclick="mostrarNotificacion('Guía: Organizar', 'info')">Organizar con etiquetas</li>
-                <li onclick="mostrarNotificacion('Guía: Exportar', 'info')">Exportar tus registros</li>
-                <li onclick="mostrarNotificacion('Guía: Privacidad', 'info')">Configurar privacidad</li>
-            </ul>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="nosotros.html">Acerca de nosotros</a>
+                <a href="preguntas.html">FAQ</a>
+                <a href="politicas.html">Políticas de privacidad</a>
+            </div>
+            <div class="footer-copy">
+                © 2025 Bitarec. Todos los derechos reservados.
+            </div>
         </div>
+    </footer>
 
-        <div class="info-column">
-            <h3>❓ PREGUNTAS FRECUENTES</h3>
-            <ul>
-                <li onclick="mostrarNotificacion('Ve a Mis Bitácoras → Nueva Bitácora', 'info')">¿Cómo crear una bitácora?</li>
-                <li onclick="mostrarNotificacion('Funcionalidad en desarrollo', 'info')">¿Cómo compartir bitácoras?</li>
-                <li onclick="mostrarNotificacion('Ve a Exportar y elige formato', 'info')">¿Cómo exportar mis registros?</li>
-                <li onclick="mostrarNotificacion('Ve a la Papelera para recuperar', 'info')">¿Cómo recuperar bitácoras eliminadas?</li>
-                <li onclick="mostrarNotificacion('Ve a Configuración → Seguridad', 'info')">¿Cómo cambiar mi contraseña?</li>
-            </ul>
-        </div>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="auth-modal">
+        <div class="auth-content">
+            <span class="close-modal" onclick="closeModal('login')">&times;</span>
+            <h2 class="form-title">Iniciar sesión</h2>
+            
+            <div id="loginError" class="error-message" style="display: none;"></div>
+            <div id="loginSuccess" class="success-message" style="display: none;"></div>
 
-        <div class="info-column">
-            <h3>ℹ️ ACERCA DE</h3>
-            <ul>
-                <li onclick="mostrarNotificacion('Misión: Facilitar la organización de registros...', 'info')">Misión y Visión</li>
-                <li onclick="mostrarNotificacion('Desarrollado con ❤️ para BITAREC', 'info')">Equipo de desarrollo</li>
-                <li onclick="mostrarNotificacion('Contacto: soporte@bitarec.com', 'info')">Contacto y soporte</li>
-                <li onclick="mostrarNotificacion('Términos de servicio en desarrollo', 'info')">Términos de servicio</li>
-                <li onclick="mostrarNotificacion('Política de privacidad en desarrollo', 'info')">Política de privacidad</li>
-            </ul>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" onclick="togglePasswordVisibility('password')">
+                        <span>Mostrar contraseña</span>
+                    </label>
+                    <a href="#" class="forgot-password">¿Olvidaste la contraseña?</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Acceder</button>
+            </form>
+
+            <div class="auth-switch">
+                <p>¿Aún no tienes cuenta? <a href="#" onclick="switchToRegister()">Regístrate</a></p>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-// Cargar estadísticas al mostrar la página
-document.addEventListener('DOMContentLoaded', function() {
-    cargarEstadisticas();
-});
-
-async function cargarEstadisticas() {
-    try {
-        const { BitacoraManager } = await import('../assets/js/bitacoras.js');
-        const { EntradaManager } = await import('../assets/js/entradas.js');
-        const { AuthManager } = await import('../assets/js/auth.js');
-
-        const usuario = await AuthManager.getUsuarioActual();
-        if (usuario) {
-            document.getElementById('welcome-title').textContent = `¡Bienvenido ${usuario.usu_nombre}!`;
-        }
-
-        // Obtener bitácoras
-        const bitacorasResult = await BitacoraManager.obtenerBitacorasUsuario();
-        if (bitacorasResult.success) {
-            document.getElementById('total-bitacoras').textContent = bitacorasResult.bitacoras.length;
-        }
-
-        // Obtener entradas recientes
-        const entradasResult = await EntradaManager.obtenerEntradasRecientes(100);
-        if (entradasResult.success) {
-            const totalEntradas = entradasResult.entradas.length;
-            document.getElementById('total-entradas').textContent = totalEntradas;
-
-            // Contar entradas de hoy
-            const hoy = new Date().toDateString();
-            const entradasHoy = entradasResult.entradas.filter(entrada => {
-                const fechaEntrada = new Date(entrada.ent_fecha_creacion).toDateString();
-                return fechaEntrada === hoy;
-            }).length;
+    <!-- Modal de Registro -->
+    <div id="registerModal" class="auth-modal">
+        <div class="auth-content">
+            <span class="close-modal" onclick="closeModal('register')">&times;</span>
+            <h2 class="form-title">Registrarse</h2>
             
-            document.getElementById('entradas-hoy').textContent = entradasHoy;
+            <div id="registerError" class="error-message" style="display: none;"></div>
+            <div id="registerSuccess" class="success-message" style="display: none;"></div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email_registro">Correo electrónico</label>
+                    <input type="email" id="email_registro" name="email_registro" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password_registro">Contraseña</label>
+                    <input type="password" id="password_registro" name="password_registro" class="form-control" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+            </form>
+
+            <div class="auth-switch">
+                <p>¿Ya tienes cuenta? <a href="#" onclick="switchToLogin()">Inicia sesión</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sistema de autenticación simple (sin módulos)
+        class AuthManager {
+            static async registrarUsuario(nombre, email, password) {
+                // Simulación de registro
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        // Guardar en localStorage
+                        const usuario = {
+                            nombre: nombre,
+                            email: email,
+                            password: password,
+                            fechaRegistro: new Date().toISOString()
+                        };
+                        
+                        // Guardar usuario
+                        const usuarios = JSON.parse(localStorage.getItem('bitarec_usuarios') || '[]');
+                        usuarios.push(usuario);
+                        localStorage.setItem('bitarec_usuarios', JSON.stringify(usuarios));
+                        
+                        resolve({ success: true });
+                    }, 1000);
+                });
+            }
+
+            static async loginUsuario(email, password) {
+                // Simulación de login
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        const usuarios = JSON.parse(localStorage.getItem('bitarec_usuarios') || '[]');
+                        const usuario = usuarios.find(u => u.email === email && u.password === password);
+                        
+                        if (usuario) {
+                            // Guardar sesión
+                            localStorage.setItem('bitarec_usuario_actual', JSON.stringify(usuario));
+                            resolve({ success: true, usuario: usuario });
+                        } else {
+                            resolve({ success: false, error: 'Credenciales incorrectas' });
+                        }
+                    }, 1000);
+                });
+            }
+
+            static async estaLogueado() {
+                const usuario = localStorage.getItem('bitarec_usuario_actual');
+                return usuario !== null;
+            }
+
+            static cerrarSesion() {
+                localStorage.removeItem('bitarec_usuario_actual');
+            }
         }
-    } catch (error) {
-        console.error('Error cargando estadísticas:', error);
-    }
-}
-</script>
+
+        // Verificar si ya está logueado
+        document.addEventListener('DOMContentLoaded', async function() {
+            if (await AuthManager.estaLogueado()) {
+                // Redirigir al dashboard si existe
+                window.location.href = 'dashboard.html';
+            }
+        });
+
+        // Manejar login
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+            const successDiv = document.getElementById('loginSuccess');
+
+            if (!email || !password) {
+                showMessage(errorDiv, 'Todos los campos son obligatorios');
+                return;
+            }
+
+            const result = await AuthManager.loginUsuario(email, password);
+            
+            if (result.success) {
+                showMessage(successDiv, 'Inicio de sesión exitoso');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
+            } else {
+                showMessage(errorDiv, result.error || 'Credenciales incorrectas');
+            }
+        });
+
+        // Manejar registro
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email_registro').value;
+            const password = document.getElementById('password_registro').value;
+            const errorDiv = document.getElementById('registerError');
+            const successDiv = document.getElementById('registerSuccess');
+
+            if (!nombre || !email || !password) {
+                showMessage(errorDiv, 'Todos los campos son obligatorios');
+                return;
+            }
+
+            if (password.length < 6) {
+                showMessage(errorDiv, 'La contraseña debe tener al menos 6 caracteres');
+                return;
+            }
+
+            const result = await AuthManager.registrarUsuario(nombre, email, password);
+            
+            if (result.success) {
+                showMessage(successDiv, 'Registro exitoso. Ahora puedes iniciar sesión.');
+                setTimeout(() => {
+                    closeModal('register');
+                    openModal('login');
+                }, 2000);
+            } else {
+                showMessage(errorDiv, result.error || 'Error en el registro');
+            }
+        });
+
+        function showMessage(element, message) {
+            element.textContent = message;
+            element.style.display = 'block';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        // Funciones de modal
+        function openModal(type) {
+            if (type === 'login') {
+                document.getElementById('loginModal').style.display = 'flex';
+                clearForms();
+            } else {
+                document.getElementById('registerModal').style.display = 'flex';
+                clearForms();
+            }
+        }
+
+        function closeModal(type) {
+            if (type === 'login') {
+                document.getElementById('loginModal').style.display = 'none';
+            } else {
+                document.getElementById('registerModal').style.display = 'none';
+            }
+            clearForms();
+        }
+
+        function switchToRegister() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('registerModal').style.display = 'flex';
+            clearForms();
+        }
+
+        function switchToLogin() {
+            document.getElementById('registerModal').style.display = 'none';
+            document.getElementById('loginModal').style.display = 'flex';
+            clearForms();
+        }
+
+        function clearForms() {
+            document.getElementById('loginError').style.display = 'none';
+            document.getElementById('registerError').style.display = 'none';
+            document.getElementById('loginSuccess').style.display = 'none';
+            document.getElementById('registerSuccess').style.display = 'none';
+            document.getElementById('loginForm').reset();
+            document.getElementById('registerForm').reset();
+        }
+
+        function togglePasswordVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            if (event.target.classList.contains('auth-modal')) {
+                event.target.style.display = 'none';
+                clearForms();
+            }
+        }
+    </script>
+</body>
+</html>
