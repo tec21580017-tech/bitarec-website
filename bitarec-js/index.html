@@ -1,5 +1,4 @@
 <div class="contenido-pagina">
-    <!-- Hero Section -->
     <section class="dashboard-hero">
         <div class="welcome-section">
             <h1 id="welcome-title">¡Bienvenido!</h1>
@@ -27,7 +26,6 @@
         </div>
     </section>
 
-    <!-- Actions Section -->
     <section class="actions-section">
         <h2>¿Qué deseas hacer hoy?</h2>
         <div class="action-grid">
@@ -66,7 +64,6 @@
         </div>
     </section>
 
-    <!-- Info Sections -->
     <div class="info-sections">
         <div class="info-column">
             <h3>📋 MANUAL RÁPIDO</h3>
@@ -111,9 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function cargarEstadisticas() {
     try {
-        const { BitacoraManager } = await import('../assets/js/bitacoras.js');
-        const { EntradaManager } = await import('../assets/js/entradas.js');
-        const { AuthManager } = await import('../assets/js/auth.js');
+        // Rutas Corregidas: Se accede a la carpeta assets/js directamente desde el index.html
+        const { BitacoraManager } = await import('./assets/js/bitacoras.js');
+        const { EntradaManager } = await import('./assets/js/entradas.js');
+        const { AuthManager } = await import('./assets/js/auth.js');
 
         const usuario = await AuthManager.getUsuarioActual();
         if (usuario) {
@@ -143,6 +141,7 @@ async function cargarEstadisticas() {
         }
     } catch (error) {
         console.error('Error cargando estadísticas:', error);
+        // Opcional: Mostrar un mensaje de error visible al usuario si las estadísticas fallan.
     }
 }
 </script>
